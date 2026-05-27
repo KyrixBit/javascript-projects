@@ -12,10 +12,6 @@ function getComputer_play() {
     }
 }
 
-function getHumanchoice (){
-    return prompt ("Choose your play: Rock, Paper or Scissors?").toLowerCase();
-}
-
 function playRound (human_play, computer_play) {
     if (human_play === computer_play) {
         humanScore ++;
@@ -43,23 +39,43 @@ function playRound (human_play, computer_play) {
 let humanScore = 0
 let computerScore = 0
 
-function playGame() {
-    
-    console.log(playRound(getHumanchoice(), getComputer_play()));
-    console.log(playRound(getHumanchoice(), getComputer_play()));
-    console.log(playRound(getHumanchoice(), getComputer_play()));
-    console.log(playRound(getHumanchoice(), getComputer_play()));
-    console.log(playRound(getHumanchoice(), getComputer_play()));
+function getWinner (humanScore, computerScore) {
+    if (humanScore === 5){
+        return document.getElementById("winner").textContent = "You Win!!! " + humanScore + " x " + computerScore
+    }
 
-    if (humanScore > computerScore) {
-        console.log("Você ganhou o jogo! " + humanScore + " x " + computerScore)
+    else if (computerScore === 5){
+        return document.getElementById("winner").textContent = "You Lose!!!" + computerScore + " x " + humanScore
     }
-    else if (computerScore > humanScore) {
-        console.log("Você perdeu o jogo! " + computerScore + " x " + humanScore)
-    }
+
     else {
-        console.log ("É um empate! " + computerScore + " x " + humanScore)
+        return document.getElementById("winner").textContent = "It's a Tie!!!" + humanScore + " x " + computerScore
     }
 }
 
-playGame();
+document.getElementById("rock").addEventListener("click", function(){
+    const result = playRound("rock", getComputer_play());
+    document.getElementById("results").textContent = result
+    document.getElementById("score").textContent = "Human: " + humanScore + "| Computer: " + computerScore
+    if (humanScore === 5 || computerScore === 5) {
+    getWinner(humanScore, computerScore);
+}
+});
+
+document.getElementById("paper").addEventListener("click", function(){
+    const result = playRound("paper", getComputer_play());
+    document.getElementById("results").textContent = result
+    document.getElementById("score").textContent = "Human: " + humanScore + "| Computer: " + computerScore
+    if (humanScore === 5 || computerScore === 5) {
+    getWinner(humanScore, computerScore);
+}
+});
+
+document.getElementById("scissors").addEventListener("click", function(){
+    const result = playRound("scissors", getComputer_play());
+    document.getElementById("results").textContent = result
+    document.getElementById("score").textContent = "Human: " + humanScore + "| Computer: " + computerScore
+    if (humanScore === 5 || computerScore === 5) {
+    getWinner(humanScore, computerScore);
+}
+});
